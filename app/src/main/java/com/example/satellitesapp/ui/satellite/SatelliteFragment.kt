@@ -1,5 +1,6 @@
 package com.example.satellitesapp.ui.satellite
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ class SatelliteFragment : Fragment(R.layout.fragment_satellite) {
 
     private val binding by viewBinding(FragmentSatelliteBinding::bind)
     private val satellitesViewModel: SatelliteViewModel by viewModels()
+    private val satelliteAdapter by lazy { SatelliteAdapter() }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,13 +29,24 @@ class SatelliteFragment : Fragment(R.layout.fragment_satellite) {
         satellitesViewModel.satellites.observe(viewLifecycleOwner){
              when(it){
                  is Resource.Success -> {
-
+                     binding.progressBar.visibility = View.GONE
+                     it.data?.let { satelliteData -> satelliteAdapter.setData(satelliteData) }
+                     binding.rvSatellites.adapter = satelliteAdapter
                  }
                  is Resource.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    AlertDialog.Builder(requireContext())
+                         .setTitle("Warning")
+                         .setMessage(it.message)
+                         .create().show()
+
 
                  }
-                 Resource.Loading -> println("dolduralacak")
+                 Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
+                 else -> {
 
+
+                 }
              }
 
     }

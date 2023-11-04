@@ -1,7 +1,7 @@
 package com.example.satellitesapp.ui.satellite
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.satellitesapp.data.model.SatelliteData
@@ -28,7 +28,7 @@ class SatelliteAdapter : RecyclerView.Adapter<SatelliteAdapter.SatelliteViewHold
 
 
     override fun onBindViewHolder(holder: SatelliteViewHolder, position: Int) {
-        holder.bind(satelliteList[position])
+        holder.bind(satelliteList[position], position)
     }
 
     override fun getItemCount() = satelliteList.size
@@ -37,9 +37,12 @@ class SatelliteAdapter : RecyclerView.Adapter<SatelliteAdapter.SatelliteViewHold
     inner class SatelliteViewHolder(private val binding: LayoutSatellitesItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(satelliteData: SatelliteData) {
-            with(binding) {
-
+        fun bind(satelliteData: SatelliteData, position: Int) {
+            binding.satellite = satelliteData
+            if (position == satelliteList.size-1){
+                binding.separatorView.visibility = View.GONE
+            }else{
+                binding.separatorView.visibility = View.VISIBLE
             }
         }
     }

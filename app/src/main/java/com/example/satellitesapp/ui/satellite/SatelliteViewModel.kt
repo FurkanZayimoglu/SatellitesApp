@@ -17,7 +17,7 @@ class SatelliteViewModel @Inject constructor(
 ): ViewModel() {
 
 
-    private val _satellites = MutableLiveData<Resource<List<SatelliteData>?>>(Resource.Loading)
+    private val _satellites = MutableLiveData<Resource<List<SatelliteData>?>>()
     val satellites: LiveData<Resource<List<SatelliteData>?>> = _satellites
 
     init {

@@ -50,8 +50,8 @@ class JsonDataProvideImpl (
         }
 
     companion object {
-        private const val SATELLITE_LIST_JSON = "satellite-list.json"
-        private const val SATELLITE_DETAIL_JSON = "satellite-detail.json"
+        private const val SATELLITE_LIST_JSON = "satellites_list.json"
+        private const val SATELLITE_DETAIL_JSON = "satellites_detail.json"
         private const val SATELLITE_POSITIONS_JSON = "positions.json"
     }
 }

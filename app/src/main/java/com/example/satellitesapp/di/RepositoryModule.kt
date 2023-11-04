@@ -8,10 +8,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ViewModelComponent::class)  // burası duruma gore değişebilir .
+@InstallIn(SingletonComponent::class)
 object RepositoryModule {
 
     @Provides
