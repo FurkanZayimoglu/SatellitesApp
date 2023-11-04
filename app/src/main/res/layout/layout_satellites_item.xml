@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="satellite"
+            type="com.example.satellitesapp.data.model.SatelliteData" />
+
+    </data>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:paddingTop="4dp"
+            android:background="@color/light_gray"
+            android:paddingBottom="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ivIcon"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@{satellite.active ? @drawable/rounded_icon_active :@drawable/rounded_icon_passive }"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toStartOf="@id/linear"
+                android:contentDescription="@string/roundedicon" />
+
+            <LinearLayout
+                android:id="@+id/linear"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="@{satellite.active ? @color/black : @color/passive }"
+                    android:text="@{satellite.name}"
+                    android:textStyle="bold"
+                    tools:text="starship-1" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvControl"
+                    android:textColor="@{satellite.active ? @color/black : @color/passive }"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Passive" />
+            </LinearLayout>
+
+            <View
+                app:layout_constraintTop_toBottomOf="@id/linear"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

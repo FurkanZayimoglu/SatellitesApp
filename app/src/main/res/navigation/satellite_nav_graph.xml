@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/news_nav_graph"
+    app:startDestination="@id/satelliteFragment">
+
+    <fragment
+        android:id="@id/satelliteFragment"
+        android:name="com.example.satellitesapp.ui.satellite.SatelliteFragment"
+        android:label="SatelliteFragment" >
+        <action
+            android:id="@+id/action_satelliteFragment_to_satelliteDetailFragment"
+            app:destination="@id/satelliteDetailFragment" >
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@id/satelliteDetailFragment"
+        android:name="com.example.satellitesapp.ui.satellitedetail.SatelliteDetailFragment"
+        android:label="SatelliteDetailFragment" >
+        <action
+            android:id="@+id/action_satelliteDetailFragment_to_satelliteFragment"
+            app:destination="@id/satelliteFragment"
+            app:popUpTo="@id/satelliteFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+</navigation>

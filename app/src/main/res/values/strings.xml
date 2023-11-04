@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SatellitesApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="starship">Starship</string>
+    <string name="roundedicon">roundedicon</string>
+    <string name="last_position">Last Position:</string>
+    <string name="cost">Cost:</string>
+    <string name="height_mass">Height/Mass:</string>
+</resources>
