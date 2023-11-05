@@ -12,6 +12,7 @@ class SatelliteRepositoryImpl @Inject constructor(
     private val jsonDataProvide: JsonDataProvide,
     private val roomDataProvide: RoomDataProvider
 ): SatelliteRepository {
+
     override suspend fun getSatellites(): Resource<List<SatelliteData>?> {
         return try {
             val satellites = jsonDataProvide.getSatellites()
@@ -23,10 +24,10 @@ class SatelliteRepositoryImpl @Inject constructor(
 
     override suspend fun searchSatellites(query: String): Resource<List<SatelliteData>?> {
         return try {
-            val satellites = jsonDataProvide.getSatellites()
+            val satellites = jsonDataProvide.searchSatellites(query)
             Resource.Success(satellites)
         } catch (e: Exception) {
-            Resource.Error(e.message.orEmpty())
+            Resource.Error(e.message.toString())
         }
     }
 
@@ -48,18 +49,30 @@ class SatelliteRepositoryImpl @Inject constructor(
 
     }
 
-    override suspend fun getSatellitePosition(satelliteId: Int): Resource<PositionData?> {
-        val positionList = roomDataProvide.getSatellitePositions()?.find { it.id == satelliteId }?.positions
-            ?: jsonDataProvide.getSatellitePositions(satelliteId)?.let {
-                roomDataProvide.deleteSatellitePositions(it)
-                roomDataProvide.insertSatellitePosition(it)
-                it.positions
+    override suspend fun getSatellitePosition(satelliteId: Int): Resource<List<PositionData?>> {
+        try {
+            val positionList = mutableListOf<PositionData>()
+
+            roomDataProvide.getSatellitePositions()?.find { it.id == satelliteId }?.let {
+                positionList.addAll(it.positions)
+            } ?: kotlin.run {
+                val satellitePositions = jsonDataProvide.getSatellitePositions(satelliteId)
+                satellitePositions?.let { roomDataProvide.deleteSatellitePositions(it) }
+                satellitePositions?.let { roomDataProvide.insertSatellitePosition(it) }
+                satellitePositions?.let { positionList.addAll(it.positions) }
             }
 
-        // bu fonksiyona bakılacak.
-
-        return positionList?.firstOrNull()?.let {
-            Resource.Success(it)
-        } ?: Resource.Error("Position not found")
+            return Resource.Success(positionList)
+        } catch (e: Exception) {
+            return Resource.Error("Bir hata oluştu: ${e.message}")
+        }
     }
+
+
+
+
+
+
+
+
 }

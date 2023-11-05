@@ -9,6 +9,6 @@ interface SatelliteRepository {
     suspend fun getSatellites(): Resource<List<SatelliteData>?>
     suspend fun searchSatellites(query: String): Resource<List<SatelliteData>?>
     suspend fun getSatelliteDetail(satelliteId: Int): Resource<SatelliteDetailData?>
-    suspend fun getSatellitePosition(satelliteId: Int): Resource<PositionData?>
+    suspend fun getSatellitePosition(satelliteId: Int): Resource<List<PositionData?>>
 
 }

@@ -24,6 +24,10 @@
             app:destination="@id/satelliteFragment"
             app:popUpTo="@id/satelliteFragment"
             app:popUpToInclusive="true" />
+
+        <argument
+            android:name="satellite"
+            app:argType="com.example.satellitesapp.data.model.SatelliteData" />
     </fragment>
 
 </navigation>

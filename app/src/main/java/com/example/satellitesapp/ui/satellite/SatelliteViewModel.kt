@@ -8,13 +8,14 @@ import com.example.satellitesapp.data.model.SatelliteData
 import com.example.satellitesapp.data.repository.SatelliteRepository
 import com.example.satellitesapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SatelliteViewModel @Inject constructor(
     private val repository: SatelliteRepository
-): ViewModel() {
+) : ViewModel() {
 
 
     private val _satellites = MutableLiveData<Resource<List<SatelliteData>?>>()
@@ -26,11 +27,20 @@ class SatelliteViewModel @Inject constructor(
 
     private fun getSatellites() = viewModelScope.launch {
         _satellites.value = Resource.Loading
+        delay(1000)
         _satellites.value = repository.getSatellites()
     }
 
 
-    private fun searchSatellites(){
+    fun searchSatellites(query: String) = viewModelScope.launch {
+        if (query.length > 2) {
+            _satellites.value = Resource.Loading
+            delay(2000)
+            _satellites.value = repository.searchSatellites(query)
+        } else {
+            _satellites.value = Resource.Loading
+            _satellites.value = repository.getSatellites()
+        }
 
     }
 }

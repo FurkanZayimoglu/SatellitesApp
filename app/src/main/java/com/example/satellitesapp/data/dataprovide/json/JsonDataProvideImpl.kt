@@ -43,7 +43,7 @@ class JsonDataProvideImpl (
     override suspend fun getSatellitePositions(satelliteId: Int): SatellitePositionData? =
         withContext(ioDispatcher) {
             assetManager.open(SATELLITE_POSITIONS_JSON)
-                .use<InputStream, SatelitePositionListData>(json::decodeFromStream).positionDataList
+                .use<InputStream, SatelitePositionListData>(json::decodeFromStream).list
                 .find {
                     it.id == satelliteId
                 }
@@ -52,6 +52,6 @@ class JsonDataProvideImpl (
     companion object {
         private const val SATELLITE_LIST_JSON = "satellites_list.json"
         private const val SATELLITE_DETAIL_JSON = "satellites_detail.json"
-        private const val SATELLITE_POSITIONS_JSON = "positions.json"
+        private const val SATELLITE_POSITIONS_JSON = "position.json"
     }
 }

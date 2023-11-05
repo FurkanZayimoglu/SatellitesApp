@@ -13,10 +13,11 @@
     tools:context=".ui.satellite.SatelliteFragment">
 
     <androidx.cardview.widget.CardView
+        android:visibility="gone"
+        tools:visibility="visible"
         android:id="@+id/cvSearchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,11 +32,15 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:visibility="gone"
+        tools:visibility="visible"
         android:id="@+id/rvSatellites"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
+        tools:itemCount="3"
         android:orientation="vertical"
+        tools:listitem="@layout/layout_satellites_item"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,9 +48,8 @@
 
         <ProgressBar
         android:id="@+id/progressBar"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@color/white"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:elevation="4dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

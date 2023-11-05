@@ -11,59 +11,65 @@
 
     </data>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:paddingTop="4dp"
-            android:background="@color/light_gray"
-            android:paddingBottom="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp">
 
-            <ImageView
-                android:id="@+id/ivIcon"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:background="@{satellite.active ? @drawable/rounded_icon_active :@drawable/rounded_icon_passive }"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toStartOf="@id/linear"
-                android:contentDescription="@string/roundedicon" />
+        <ImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="@{satellite.active ? @drawable/rounded_icon_active :@drawable/rounded_icon_passive }"
+            android:contentDescription="@string/roundedicon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.354"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <LinearLayout
-                android:id="@+id/linear"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/ivIcon"
+            android:layout_marginStart="32dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:textColor="@{satellite.active ? @color/black : @color/passive }"
-                    android:text="@{satellite.name}"
-                    android:textStyle="bold"
-                    tools:text="starship-1" />
+                android:layout_gravity="center"
+                android:gravity="start"
+                android:text="@{satellite.name}"
+                android:textColor="@{satellite.active ? @color/black : @color/passive }"
+                android:textStyle="bold"
+                tools:text="starship-1" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvControl"
-                    android:textColor="@{satellite.active ? @color/black : @color/passive }"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Passive" />
-            </LinearLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvControl"
+                android:layout_width="wrap_content"
+                android:gravity="start"
+                android:layout_height="wrap_content"
+                android:text="@{satellite.active ? @string/active : @string/passive  }"
+                android:textColor="@{satellite.active ? @color/black : @color/passive }"
+                tools:text="Passive" />
+        </LinearLayout>
 
-            <View
-                android:id="@+id/separatorView"
-                app:layout_constraintTop_toBottomOf="@id/linear"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/black" />
+        <View
+            android:id="@+id/separatorView"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linear" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

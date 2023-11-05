@@ -6,4 +6,7 @@
     <string name="last_position">Last Position:</string>
     <string name="cost">Cost:</string>
     <string name="height_mass">Height/Mass:</string>
+    <string name="active">active</string>
+    <string name="passive">passive</string>
+
 </resources>

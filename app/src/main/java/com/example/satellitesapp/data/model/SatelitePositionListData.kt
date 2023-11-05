@@ -4,5 +4,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SatelitePositionListData(
-    val positionDataList: List<SatellitePositionData>
+    val list: List<SatellitePositionData>
 )
