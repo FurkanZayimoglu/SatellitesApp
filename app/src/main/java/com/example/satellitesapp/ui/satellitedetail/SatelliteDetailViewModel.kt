@@ -18,8 +18,10 @@ class SatelliteDetailViewModel @Inject constructor(
     private val repository: SatelliteRepository
 ) : ViewModel() {
 
-    private val _satelliteDetailAndPosition = MutableLiveData<Resource<Pair<SatelliteDetailData,List<PositionData?>>>>()
-    val satelliteDetailAndPosition: LiveData<Resource<Pair<SatelliteDetailData, List<PositionData?>>>> = _satelliteDetailAndPosition
+    private val _satelliteDetailAndPosition =
+        MutableLiveData<Resource<Pair<SatelliteDetailData, List<PositionData?>>>>()
+    val satelliteDetailAndPosition: LiveData<Resource<Pair<SatelliteDetailData, List<PositionData?>>>> =
+        _satelliteDetailAndPosition
 
     fun getSatelliteDetailAndPosition(satelliteId: Int) {
         viewModelScope.launch {
@@ -35,7 +37,8 @@ class SatelliteDetailViewModel @Inject constructor(
                 } else if (detail is Resource.Success && positions is Resource.Success
                     && detail.data != null && positions.data.isNotEmpty()
                 ) {
-                    _satelliteDetailAndPosition.value = Resource.Success(Pair(detail.data, positions.data))
+                    _satelliteDetailAndPosition.value =
+                        Resource.Success(Pair(detail.data, positions.data))
                 }
             } catch (e: Exception) {
                 _satelliteDetailAndPosition.value = Resource.Error("Bir hata oluştu: ${e.message}")

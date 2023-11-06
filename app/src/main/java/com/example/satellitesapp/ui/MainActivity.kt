@@ -1,11 +1,9 @@
 package com.example.satellitesapp.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 import com.example.satellitesapp.R
 import com.example.satellitesapp.databinding.ActivityMainBinding
 import com.example.satellitesapp.utils.viewBinding

@@ -34,50 +34,48 @@ class SatelliteFragment : Fragment(R.layout.fragment_satellite) {
 
     }
 
-    private fun satellitesObserve(){
-        satellitesViewModel.satellites.observe(viewLifecycleOwner){
-             when(it){
-                 is Resource.Success -> {
-                     binding.progressBar.visibility = View.GONE
-                     binding.cvSearchView.visibility = View.VISIBLE
-                     binding.rvSatellites.visibility = View.VISIBLE
-                     binding.rvSatellites.adapter = satelliteAdapter
-                     it.data?.let { satelliteData -> satelliteAdapter.setData(satelliteData) }
-                 }
-                 is Resource.Error -> {
+    private fun satellitesObserve() {
+        satellitesViewModel.satellites.observe(viewLifecycleOwner) {
+            when (it) {
+                is Resource.Success -> {
                     binding.progressBar.visibility = View.GONE
-                     AlertDialog.Builder(requireContext())
-                         .setTitle("Warning")
-                         .setMessage("Not found values.")
-                         .setPositiveButton("Close"){ dialog, _ ->
-                             dialog.dismiss()
-                         }
-                         .create().show()
-                 }
-                 is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
-                 else -> {
-                 }
-             }
+                    binding.cvSearchView.visibility = View.VISIBLE
+                    binding.rvSatellites.visibility = View.VISIBLE
+                    binding.rvSatellites.adapter = satelliteAdapter
+                    it.data?.let { satelliteData -> satelliteAdapter.setData(satelliteData) }
+                }
 
-    }
-}
+                is Resource.Error -> {
+                    binding.progressBar.visibility = View.GONE
+                    AlertDialog.Builder(requireContext())
+                        .setTitle("Warning")
+                        .setMessage("Not found values.")
+                        .setPositiveButton("Close") { dialog, _ ->
+                            dialog.dismiss()
+                        }
+                        .create().show()
+                }
 
-    private fun searchSatellitesObserve(){
-         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-             override fun onQueryTextSubmit(query: String?): Boolean {
-                 return false
-             }
+                is Resource.Loading -> binding.progressBar.visibility = View.VISIBLE
+                else -> {
+                }
+            }
 
-             override fun onQueryTextChange(newText: String?): Boolean {
-                 newText?.let {
-                     satellitesViewModel.searchSatellites(it)
-                 }
-                 return false
-             }
-         })
+        }
     }
 
+    private fun searchSatellitesObserve() {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
 
-
-
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let {
+                    satellitesViewModel.searchSatellites(it)
+                }
+                return false
+            }
+        })
+    }
 }

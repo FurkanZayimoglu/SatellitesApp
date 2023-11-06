@@ -16,8 +16,8 @@ import com.example.satellitesapp.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SatelliteDetailFragment : Fragment(R.layout.fragment_satellite_detail) {
@@ -51,14 +51,13 @@ class SatelliteDetailFragment : Fragment(R.layout.fragment_satellite_detail) {
                     AlertDialog.Builder(requireContext())
                         .setTitle("Warning")
                         .setMessage("Not found values.")
-                        .setPositiveButton("Close"){ dialog, _ ->
+                        .setPositiveButton("Close") { dialog, _ ->
                             dialog.dismiss()
                         }
                         .create().show()
                 }
             }
         }
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -68,7 +67,7 @@ class SatelliteDetailFragment : Fragment(R.layout.fragment_satellite_detail) {
             tvSatelliteDate.text = detail.first.firstFlight
             tvHeightMass.text = "${detail.first.height}/${detail.first.mass}"
             tvCost.text = detail.first.costPerLaunch.toString()
-            CoroutineScope(Dispatchers.Main).launch{
+            CoroutineScope(Dispatchers.Main).launch {
                 while (true) {
                     for (index in detail.second) {
                         tvLastPosition.text = "${index?.posX}/${index?.posY}"
@@ -78,8 +77,4 @@ class SatelliteDetailFragment : Fragment(R.layout.fragment_satellite_detail) {
             }
         }
     }
-
-
-
-
 }

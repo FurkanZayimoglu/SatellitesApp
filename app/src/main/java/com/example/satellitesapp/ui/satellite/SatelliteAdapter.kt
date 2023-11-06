@@ -10,7 +10,7 @@ import com.example.satellitesapp.databinding.LayoutSatellitesItemBinding
 class SatelliteAdapter : RecyclerView.Adapter<SatelliteAdapter.SatelliteViewHolder>() {
 
     private var satelliteList = ArrayList<SatelliteData>()
-    var onClickSatelliteItem: (SatelliteData)-> Unit = {}
+    var onClickSatelliteItem: (SatelliteData) -> Unit = {}
 
     fun setData(data: List<SatelliteData>) {
         satelliteList.clear()
@@ -40,16 +40,15 @@ class SatelliteAdapter : RecyclerView.Adapter<SatelliteAdapter.SatelliteViewHold
         fun bind(satelliteData: SatelliteData, position: Int) {
             binding.satellite = satelliteData
 
-            if (position == satelliteList.size-1){
+            if (position == satelliteList.size - 1) {
                 binding.separatorView.visibility = View.GONE
-            }else{
+            } else {
                 binding.separatorView.visibility = View.VISIBLE
             }
 
-            binding.root.setOnClickListener{
+            binding.root.setOnClickListener {
                 onClickSatelliteItem(satelliteData)
             }
-
 
 
         }

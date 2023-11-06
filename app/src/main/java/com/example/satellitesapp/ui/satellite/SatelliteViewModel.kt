@@ -41,6 +41,5 @@ class SatelliteViewModel @Inject constructor(
             _satellites.value = Resource.Loading
             _satellites.value = repository.getSatellites()
         }
-
     }
 }
